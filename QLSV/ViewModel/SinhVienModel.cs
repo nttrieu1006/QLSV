@@ -5,7 +5,7 @@ namespace QLSV.ViewModel
     public class SinhVienModel : IUser
     {
         public long Id { get; set; }
-        public string MaHS { get; set; }
+        public string MaSV { get; set; }
         public string HoTen { get; set; }
         public string NTNS { get; set; }
         public string Lop { get; set; }
@@ -18,7 +18,7 @@ namespace QLSV.ViewModel
         {
             this.Id = sv.Id;
             HoTen = sv.HoTen;
-            MaHS = sv.MaHS;
+            MaSV = sv.MaSV;
             NTNS = sv.NTNS;
             Lop = sv.Lop.TenLop;
         }
@@ -26,7 +26,7 @@ namespace QLSV.ViewModel
 
     public class CreateHSModel : IUser
     {
-        public string MaHS { get; set; }
+        public string MaSV { get; set; }
         public string HoTen { get; set; }
         public string NTNS { get; set; }
         public long Lop { get; set; }

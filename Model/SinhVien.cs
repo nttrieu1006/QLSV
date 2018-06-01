@@ -12,7 +12,7 @@ namespace Model
     public class SinhVien : Entity<long>, IUser
     {
         [MaxLength(256)]
-        public string MaHS { get; set; }
+        public string MaSV { get; set; }
 
         [MaxLength(256)]
         public string HoTen { get; set; }
