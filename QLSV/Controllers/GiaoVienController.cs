@@ -1,10 +1,6 @@
 ﻿using Model;
 using QLSV.ViewModel;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace QLSV.Controllers
@@ -33,6 +29,7 @@ namespace QLSV.Controllers
             });
             return Ok(list);
         }
+
         [HttpGet]
         public IHttpActionResult GetById(long id)
         {
@@ -49,6 +46,7 @@ namespace QLSV.Controllers
             }
             return httpActionResult;
         }
+
         [HttpPost]
         public IHttpActionResult Create(CreateGVModel model)
         {
@@ -84,6 +82,7 @@ namespace QLSV.Controllers
 
             return httpActionResult;
         }
+
         [HttpPut]
         public IHttpActionResult Update(UpdateGVModel model)
         {

@@ -1,10 +1,6 @@
 ﻿using Model;
 using QLSV.ViewModel;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace QLSV.Controllers
@@ -50,6 +46,7 @@ namespace QLSV.Controllers
             }
             return httpActionResult;
         }
+
         [HttpPost]
         public IHttpActionResult Create(CreateHSModel model)
         {
@@ -95,14 +92,14 @@ namespace QLSV.Controllers
             SinhVien sv = db.SinhViens.FirstOrDefault(x => x.Id == model.Id);
             if (sv == null)
             {
-                err.Add("Không tìm thấy học sinh");                
+                err.Add("Không tìm thấy học sinh");
             }
             Lop lop = db.Lops.FirstOrDefault(x => x.Id == model.Lop);
             if (lop == null)
             {
                 err.Add("Lớp không tồn tại");
             }
-            if(err.errors.Count == 0)
+            if (err.errors.Count == 0)
             {
                 sv.MaSV = model.MaSV ?? model.MaSV;
                 sv.HoTen = model.HoTen ?? model.HoTen;
