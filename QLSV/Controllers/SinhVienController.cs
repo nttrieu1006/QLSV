@@ -17,6 +17,27 @@ namespace QLSV.Controllers
             err = new ErrorModel();
         }
 
+        /**
+         * @api {Get} /SinhVien/Danhsach
+         * @apigroup SINHVIEN
+         * @apiPermission none
+         * @apiVersion 1.0.0
+         * 
+         * @apiSuccess {long} Id Id của sinh viên
+         * @apiSuccess {string} MaSV Mã của sinh viên
+         * @apiSuccess {string} HoTen Họ tên của sinh viên
+         * @apiSuccess {string} NTNS Ngày tháng năm sinh của sinh viên
+         * @apiSuccess {string} Lop Tên lớp sinh viên đang học
+         * 
+         * @apiSuccessExample {json} Response: 
+         * {
+         *      Id:1,
+         *      MaGV: "SV001",
+         *      HoTen: "Nguyễn Văn A",
+         *      NTNS: "1996",
+         *      Lop: "14ABC01"
+         * }
+         */
         [HttpGet]
         public IHttpActionResult DanhSach()
         {
@@ -31,8 +52,37 @@ namespace QLSV.Controllers
             return Ok(list);
         }
 
+        /**
+        * @api {Get} /SinhVien/SVTheoId/:id
+        * @apigroup SINHVIEN
+        * @apiPermission none
+        * @apiVersion 1.0.0
+        * 
+        * @apiSuccess {long} Id Id của sinh viên
+        * @apiSuccess {string} MaSV Mã của sinh viên
+        * @apiSuccess {string} HoTen Họ tên của sinh viên
+        * @apiSuccess {string} NTNS Ngày tháng năm sinh của sinh viên
+        * @apiSuccess {string} Lop Tên lớp sinh viên đang học
+        * 
+        * @apiSuccessExample {json} Response: 
+        * {
+        *      Id:1,
+        *      MaSV: "GV001",
+        *      HoTen: "Nguyễn Văn A",
+        *      NTNS: "1990",
+        *      Lop: "14ABC01"
+        * }
+        * 
+        * @apiError (Error 404) {string} Errors Mảng các lỗi
+        * @apiErrorExample {json} Error-Response:
+        *     HTTP/1.1 404 Not Found
+        *     {
+        *       "error": "Không tìm thấy sinh viên"
+        *     }
+        *
+        */
         [HttpGet]
-        public IHttpActionResult DanhSachTheoId(long id)
+        public IHttpActionResult SVTheoId(long id)
         {
             IHttpActionResult httpActionResult;
             SinhVien sv = db.SinhViens.FirstOrDefault(x => x.Id == id);
@@ -48,6 +98,50 @@ namespace QLSV.Controllers
             return httpActionResult;
         }
 
+        /**
+         * @api {Post} /SinhVien/TaoMoi
+         * @apigroup SINHVIEN
+         * @apiPermission none
+         * @apiVersion 1.0.0
+         * 
+         * @apiParam {string} MaSV Mã của sinh viên mới
+         * @apiParam {string} HoTen Họ tên của sinh viên mới
+         * @apiParam {string} [NTNS] Ngày tháng năm sinh của sinh viên mới
+         * @apiParam {long} Lop Id của lớp sinh viên mới đang học
+         * 
+         * @apiParamExample {json} Request-Example: 
+		 * {
+         *      MaSV: "SV002",
+         *      HoTen: "Nguyễn Văn B",
+         *      NTNS: "1998",
+         *      Lop: 2
+		 * }
+         * 
+         * @apiSuccess {long} Id Id của sinh viên vửa tạo
+         * @apiSuccess {string} MaSV Mã của sinh viên vửa tạo
+         * @apiSuccess {string} HoTen Họ tên của sinh viên vửa tạo
+         * @apiSuccess {string} [NTNS] Ngày tháng năm sinh của sinh viên vửa tạo
+         * @apiSuccess {long} Lop Id của lớp sinh viên vửa tạo đang học 
+         * 
+         * @apiSuccessExample {json} Response: 
+         * {
+         *      Id:2,
+         *      MaSV: "SV002",
+         *      HoTen: "Nguyễn Văn B",
+         *      NTNS: "1998",
+         *      Lop: 2
+         * }
+         * 
+         * @apiError (Error 404) {string} Errors Mảng các lỗi
+         * @apiErrorExample {json} Error-Response:
+         *     HTTP/1.1 400 Bad Request
+         *     {
+         *       "error": "Mã sinh viên không được để trống",
+         *       "error": "Họ tên sinh viên không được để trống",
+         *       "error": "Lớp không tồn tại"    
+         *     }
+         *
+         */
         [HttpPost]
         public IHttpActionResult TaoMoi(TaoHSModel model)
         {
@@ -86,6 +180,51 @@ namespace QLSV.Controllers
             return httpActionResult;
         }
 
+        /**
+         * @api {Put} /SinhVien/Sua
+         * @apigroup SINHVIEN
+         * @apiPermission none
+         * @apiVersion 1.0.0
+         * 
+         * @apiParam {long} Id Id cúa sinh viên cần sửa
+         * @apiParam {string} MaSV Mã của sinh viên cần sửa
+         * @apiParam {string} HoTen Họ tên của sinh viên cần sửa
+         * @apiParam {string} [NTNS] Ngày tháng năm sinh của sinh viên cần sửa
+         * @apiParam {long} Lop Id của lớp sinh viên cần sửa đang học
+         * 
+         * @apiParamExample {json} Request-Example: 
+		 * {
+         *      Id : 2
+         *      MaSV: "SV003",
+         *      HoTen: "Nguyễn Văn B",
+         *      NTNS: "1998",
+         *      Lop: 2
+		 * }
+         * 
+         * @apiSuccess {long} Id Id của sinh viên vửa sửa
+         * @apiSuccess {string} MaSV Mã của sinh viên vửa sửa
+         * @apiSuccess {string} HoTen Họ tên của sinh viên vửa sửa
+         * @apiSuccess {string} [NTNS] Ngày tháng năm sinh của sinh viên vửa sửa
+         * @apiSuccess {long} Lop Id của lớp sinh viên vửa sửa đang học 
+         * 
+         * @apiSuccessExample {json} Response: 
+         * {
+         *      Id : 2
+         *      MaSV: "SV003",
+         *      HoTen: "Nguyễn Văn B",
+         *      NTNS: "1998",
+         *      Lop: 2
+         * }
+         * 
+         * @apiError (Error 404) {string} Errors Mảng các lỗi
+         * @apiErrorExample {json} Error-Response:
+         *     HTTP/1.1 404 Not Found
+         *     {
+         *       "error": "Không tìm thấy sinh viên",
+         *       "error": "Lớp không tồn tại"     
+         *     }
+         *
+         */
         [HttpPut]
         public IHttpActionResult Sua(SuaHSModel model)
         {

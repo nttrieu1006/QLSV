@@ -79,7 +79,7 @@ namespace QLSV.Controllers
          *     {
          *       "error": "Không tìm thấy giáo viên"
          *     }
-
+         *
          */
         [HttpGet]
         public IHttpActionResult GVTheoId(long id)
@@ -139,7 +139,7 @@ namespace QLSV.Controllers
          *       "error": "Mã giáo viên không được để trống",
          *       "error": "Họ tên giáo viên không được để trống",
          *     }
-
+         *
          */
         [HttpPost]
         public IHttpActionResult TaoMoi(TaoGVModel model)
@@ -183,6 +183,7 @@ namespace QLSV.Controllers
          * @apiPermission none
          * @apiVersion 1.0.0
          * 
+         * @apiParam {long} Id Id của giáo viên cần sửa
          * @apiParam {string} MaGV Mã của giáo viên cần sửa
          * @apiParam {string} HoTen Họ tên của giáo viên cần sửa
          * @apiParam {string} [NTNS] Ngày tháng năm sinh của giáo viên cần sửa
@@ -190,7 +191,8 @@ namespace QLSV.Controllers
          * 
          * @apiParamExample {json} Request-Example: 
 		 * {
-         *      MaGV: "GV002",
+         *      Id : 2
+         *      MaGV: "GV003",
          *      HoTen: "Nguyễn Văn B",
          *      NTNS: "1988",
          *      TrinhDo: "Tiến Sĩ"
@@ -205,7 +207,7 @@ namespace QLSV.Controllers
          * @apiSuccessExample {json} Response: 
          * {
          *      Id:2,
-         *      MaGV: "GV002",
+         *      MaGV: "GV003",
          *      HoTen: "Nguyễn Văn B",
          *      NTNS: "1988",
          *      TrinhDo: "Tiến Sĩ"
@@ -217,7 +219,7 @@ namespace QLSV.Controllers
          *     {
          *       "error": "Không tìm thấy giáo viên"
          *     }
-
+         *
          */
         [HttpPut]
         public IHttpActionResult Sua(SuaGVModel model)
