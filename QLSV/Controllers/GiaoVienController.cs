@@ -17,6 +17,27 @@ namespace QLSV.Controllers
             err = new ErrorModel();
         }
 
+        /**
+         * @api {Get} /GiaoVien/Danhsach
+         * @apigroup GIAOVIEN
+         * @apiPermission none
+         * @apiVersion 1.0.0
+         * 
+         * @apiSuccess {long} Id Id của giáo viên
+         * @apiSuccess {string} MaGV Mã của giáo viên
+         * @apiSuccess {string} HoTen Họ tên của giáo viên
+         * @apiSuccess {string} NTNS Ngày tháng năm sinh của giáo viên
+         * @apiSuccess {string} TrinhDo Trình độ học vấn của giáo viên
+         * 
+         * @apiSuccessExample {json} Response: 
+         * {
+         *      Id:1,
+         *      MaGV: "GV001",
+         *      HoTen: "Nguyễn Văn A",
+         *      NTNS: "1990",
+         *      TrinhDo: "Tiến Sĩ"
+         * }
+         */
         [HttpGet]
         public IHttpActionResult DanhSach()
         {
@@ -31,8 +52,37 @@ namespace QLSV.Controllers
             return Ok(list);
         }
 
+        /**
+         * @api {Get} /GiaoVien/GVTheoId/:id
+         * @apigroup GIAOVIEN
+         * @apiPermission none
+         * @apiVersion 1.0.0
+         * 
+         * @apiSuccess {long} Id Id của giáo viên
+         * @apiSuccess {string} MaGV Mã của giáo viên
+         * @apiSuccess {string} HoTen Họ tên của giáo viên
+         * @apiSuccess {string} NTNS Ngày tháng năm sinh của giáo viên
+         * @apiSuccess {string} TrinhDo Trình độ học vấn của giáo viên
+         * 
+         * @apiSuccessExample {json} Response: 
+         * {
+         *      Id:1,
+         *      MaGV: "GV001",
+         *      HoTen: "Nguyễn Văn A",
+         *      NTNS: "1990",
+         *      TrinhDo: "Tiến Sĩ"
+         * }
+         * 
+         * @apiError (Error 404) {string} Errors Mảng các lỗi
+         * @apiErrorExample {json} Error-Response:
+         *     HTTP/1.1 404 Not Found
+         *     {
+         *       "error": "Không tìm thấy giáo viên"
+         *     }
+
+         */
         [HttpGet]
-        public IHttpActionResult DanhSachTheoId(long id)
+        public IHttpActionResult GVTheoId(long id)
         {
             IHttpActionResult httpActionResult;
             GiaoVien giaoVien = db.GiaoViens.FirstOrDefault(x => x.Id == id);
@@ -48,6 +98,49 @@ namespace QLSV.Controllers
             return httpActionResult;
         }
 
+        /**
+         * @api {Post} /GiaoVien/TaoMoi
+         * @apigroup GIAOVIEN
+         * @apiPermission none
+         * @apiVersion 1.0.0
+         * 
+         * @apiParam {string} MaGV Mã của giáo viên mới
+         * @apiParam {string} HoTen Họ tên của giáo viên mới
+         * @apiParam {string} [NTNS] Ngày tháng năm sinh của giáo viên mới
+         * @apiParam {string} [TrinhDo] Trình độ học vấn của giáo viên mới
+         * 
+         * @apiParamExample {json} Request-Example: 
+		 * {
+         *      MaGV: "GV002",
+         *      HoTen: "Nguyễn Văn B",
+         *      NTNS: "1988",
+         *      TrinhDo: "Tiến Sĩ"
+		 * }
+         * 
+         * @apiSuccess {long} Id Id của giáo viên vửa tạo
+         * @apiSuccess {string} MaGV Mã của giáo viên vửa tạo
+         * @apiSuccess {string} HoTen Họ tên của giáo viên vửa tạo
+         * @apiSuccess {string} NTNS Ngày tháng năm sinh của giáo viên vửa tạo
+         * @apiSuccess {string} TrinhDo Trình độ học vấn của giáo viên vửa tạo
+         * 
+         * @apiSuccessExample {json} Response: 
+         * {
+         *      Id:2,
+         *      MaGV: "GV002",
+         *      HoTen: "Nguyễn Văn B",
+         *      NTNS: "1988",
+         *      TrinhDo: "Tiến Sĩ"
+         * }
+         * 
+         * @apiError (Error 404) {string} Errors Mảng các lỗi
+         * @apiErrorExample {json} Error-Response:
+         *     HTTP/1.1 400 Bad Request
+         *     {
+         *       "error": "Mã giáo viên không được để trống",
+         *       "error": "Họ tên giáo viên không được để trống",
+         *     }
+
+         */
         [HttpPost]
         public IHttpActionResult TaoMoi(TaoGVModel model)
         {
@@ -84,6 +177,48 @@ namespace QLSV.Controllers
             return httpActionResult;
         }
 
+        /**
+         * @api {Put} /GiaoVien/Sua
+         * @apigroup GIAOVIEN
+         * @apiPermission none
+         * @apiVersion 1.0.0
+         * 
+         * @apiParam {string} MaGV Mã của giáo viên cần sửa
+         * @apiParam {string} HoTen Họ tên của giáo viên cần sửa
+         * @apiParam {string} [NTNS] Ngày tháng năm sinh của giáo viên cần sửa
+         * @apiParam {string} [TrinhDo] Trình độ học vấn của giáo viên cần sửa
+         * 
+         * @apiParamExample {json} Request-Example: 
+		 * {
+         *      MaGV: "GV002",
+         *      HoTen: "Nguyễn Văn B",
+         *      NTNS: "1988",
+         *      TrinhDo: "Tiến Sĩ"
+		 * }
+         * 
+         * @apiSuccess {long} Id Id của giáo viên vửa sửa
+         * @apiSuccess {string} MaGV Mã của giáo viên vửa sửa
+         * @apiSuccess {string} HoTen Họ tên của giáo viên vửa sửa
+         * @apiSuccess {string} NTNS Ngày tháng năm sinh của giáo viên vửa sửa
+         * @apiSuccess {string} TrinhDo Trình độ học vấn của giáo viên vửa sửa
+         * 
+         * @apiSuccessExample {json} Response: 
+         * {
+         *      Id:2,
+         *      MaGV: "GV002",
+         *      HoTen: "Nguyễn Văn B",
+         *      NTNS: "1988",
+         *      TrinhDo: "Tiến Sĩ"
+         * }
+         * 
+         * @apiError (Error 404) {string} Errors Mảng các lỗi
+         * @apiErrorExample {json} Error-Response:
+         *     HTTP/1.1 404 Not Found
+         *     {
+         *       "error": "Không tìm thấy giáo viên"
+         *     }
+
+         */
         [HttpPut]
         public IHttpActionResult Sua(SuaGVModel model)
         {
