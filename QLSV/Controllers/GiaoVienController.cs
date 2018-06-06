@@ -1,4 +1,5 @@
 ﻿using Model;
+using QLSV.Infrastructure;
 using QLSV.ViewModel;
 using System.Linq;
 using System.Web.Http;
@@ -38,7 +39,7 @@ namespace QLSV.Controllers
             if (giaoVien == null)
             {
                 err.Add("Không tìm thấy giáo viên");
-                httpActionResult = Ok(err);
+                httpActionResult = new ErrorActionResult(Request,System.Net.HttpStatusCode.NotFound,err);
             }
             else
             {
@@ -77,7 +78,7 @@ namespace QLSV.Controllers
             }
             else
             {
-                httpActionResult = Ok(err);
+                httpActionResult = new ErrorActionResult(Request,System.Net.HttpStatusCode.BadRequest,err);
             }
 
             return httpActionResult;
@@ -91,7 +92,7 @@ namespace QLSV.Controllers
             if (giaoVien == null)
             {
                 err.Add("Không tìm thấy giáo viên");
-                httpActionResult = Ok(err);
+                httpActionResult = new ErrorActionResult(Request, System.Net.HttpStatusCode.NotFound, err);
             }
             else
             {

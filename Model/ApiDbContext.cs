@@ -32,9 +32,9 @@ namespace Model
         }
     }
 
-    internal class IdentityDbInit : DropCreateDatabaseIfModelChanges<ApiDbContext>
+    public class IdentityDbInit : DropCreateDatabaseIfModelChanges<ApiDbContext>
     {
-        public void Seed(ApiDbContext context)
+        protected override void Seed(ApiDbContext context)
         {
             PerformInitialSetup(context);
             base.Seed(context);
