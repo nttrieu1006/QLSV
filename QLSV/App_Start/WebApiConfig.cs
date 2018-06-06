@@ -1,6 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Autofac;
+using Autofac.Integration.WebApi;
+using QLSV.Modules;
+using System.Reflection;
 using System.Web.Http;
 
 namespace QLSV
@@ -19,6 +20,11 @@ namespace QLSV
                 routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            var builder = new ContainerBuilder();
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+
+            builder.RegisterModule(new EFModule());
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(builder.Build());
         }
     }
 }

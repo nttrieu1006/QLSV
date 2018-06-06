@@ -1,8 +1,10 @@
-﻿using System.Data.Entity;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace Model
 {
-    public class ApiDbContext : DbContext
+    public class ApiDbContext : IdentityDbContext
     {
         public ApiDbContext() : base("ApiConnection")
         {
@@ -34,12 +36,35 @@ namespace Model
     {
         public void Seed(ApiDbContext context)
         {
-            PerformInit();
+            PerformInitialSetup(context);
             base.Seed(context);
         }
 
-        public void PerformInit()
+        public void PerformInitialSetup(ApiDbContext context)
         {
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var userManager = new UserManager<Account>(new UserStore<Account>(context));
+
+            roleManager.Create(new IdentityRole()
+            {
+                Name = "Admin"
+            });
+
+            roleManager.Create(new IdentityRole()
+            {
+                Name = "User"
+            });
+
+            Account account = new Account()
+            {
+                UserName = "admin",
+                Email = "admin@test.com",
+                EmailConfirmed = true
+            };
+
+            userManager.Create(account, "Abc123!!!");
+
+            userManager.AddToRole(account.Id, "Admin");
         }
     }
 }
