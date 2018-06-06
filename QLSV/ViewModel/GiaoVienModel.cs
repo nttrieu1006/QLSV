@@ -24,7 +24,7 @@ namespace QLSV.ViewModel
         }
     }
 
-    public class CreateGVModel : IUser
+    public class TaoGVModel : IUser
     {
         public string MaGV { get; set; }
         public string HoTen { get; set; }
@@ -32,7 +32,7 @@ namespace QLSV.ViewModel
         public string TrinhDo { get; set; }
     }
 
-    public class UpdateGVModel : CreateGVModel
+    public class SuaGVModel : TaoGVModel
     {
         public long Id { get; set; }
     }

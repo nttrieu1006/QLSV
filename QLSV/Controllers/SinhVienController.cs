@@ -17,7 +17,7 @@ namespace QLSV.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetAll()
+        public IHttpActionResult DanhSach()
         {
             var list = db.SinhViens.Select(x => new SinhVienModel()
             {
@@ -31,7 +31,7 @@ namespace QLSV.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetById(long id)
+        public IHttpActionResult DanhSachTheoId(long id)
         {
             IHttpActionResult httpActionResult;
             SinhVien sv = db.SinhViens.FirstOrDefault(x => x.Id == id);
@@ -48,7 +48,7 @@ namespace QLSV.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Create(CreateHSModel model)
+        public IHttpActionResult TaoMoi(TaoHSModel model)
         {
             IHttpActionResult httpActionResult;
             if (string.IsNullOrEmpty(model.MaSV))
@@ -86,7 +86,7 @@ namespace QLSV.Controllers
         }
 
         [HttpPut]
-        public IHttpActionResult Update(UpdateHSModel model)
+        public IHttpActionResult Sua(SuaHSModel model)
         {
             IHttpActionResult httpActionResult;
             SinhVien sv = db.SinhViens.FirstOrDefault(x => x.Id == model.Id);

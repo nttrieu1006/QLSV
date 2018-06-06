@@ -24,7 +24,7 @@ namespace QLSV.ViewModel
         }
     }
 
-    public class CreateHSModel : IUser
+    public class TaoHSModel : IUser
     {
         public string MaSV { get; set; }
         public string HoTen { get; set; }
@@ -32,7 +32,7 @@ namespace QLSV.ViewModel
         public long Lop { get; set; }
     }
 
-    public class UpdateHSModel : CreateHSModel
+    public class SuaHSModel : TaoHSModel
     {
         public long Id { get; set; }
     }

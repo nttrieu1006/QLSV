@@ -17,7 +17,7 @@ namespace QLSV.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetAll()
+        public IHttpActionResult DanhSach()
         {
             var list = db.Lops.Select(x => new LopModel
             {
@@ -31,7 +31,7 @@ namespace QLSV.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetById(long id)
+        public IHttpActionResult DanhSachTheoId(long id)
         {
             IHttpActionResult httpActionResult;
             Lop lop = db.Lops.FirstOrDefault(x => x.Id == id);
@@ -48,7 +48,7 @@ namespace QLSV.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Create(CreateLopModel model)
+        public IHttpActionResult TaoMoi(TaoLopModel model)
         {
             IHttpActionResult httpActionResult;
             if (string.IsNullOrEmpty(model.MaLop))
@@ -87,7 +87,7 @@ namespace QLSV.Controllers
         }
 
         [HttpPut]
-        public IHttpActionResult Update(UpdateLopModel model)
+        public IHttpActionResult Sua(SuaLopModel model)
         {
             IHttpActionResult httpActionResult;
             Lop lop = db.Lops.FirstOrDefault(x => x.Id == model.Id);

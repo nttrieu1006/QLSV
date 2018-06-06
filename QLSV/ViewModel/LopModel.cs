@@ -24,7 +24,7 @@ namespace QLSV.ViewModel
         }
     }
 
-    public class CreateLopModel
+    public class TaoLopModel
     {
         public string MaLop { get; set; }
         public string TenLop { get; set; }
@@ -32,7 +32,7 @@ namespace QLSV.ViewModel
         public int SiSo { get; set; }
     }
 
-    public class UpdateLopModel : CreateLopModel
+    public class SuaLopModel : TaoLopModel
     {
         public long Id { get; set; }
     }

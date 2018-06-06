@@ -17,7 +17,7 @@ namespace QLSV.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetAll()
+        public IHttpActionResult DanhSach()
         {
             var list = db.GiaoViens.Select(x => new GiaoVienModel
             {
@@ -31,7 +31,7 @@ namespace QLSV.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetById(long id)
+        public IHttpActionResult DanhSachTheoId(long id)
         {
             IHttpActionResult httpActionResult;
             GiaoVien giaoVien = db.GiaoViens.FirstOrDefault(x => x.Id == id);
@@ -48,7 +48,7 @@ namespace QLSV.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Create(CreateGVModel model)
+        public IHttpActionResult TaoMoi(TaoGVModel model)
         {
             IHttpActionResult httpActionResult;
             if (string.IsNullOrEmpty(model.MaGV))
@@ -84,7 +84,7 @@ namespace QLSV.Controllers
         }
 
         [HttpPut]
-        public IHttpActionResult Update(UpdateGVModel model)
+        public IHttpActionResult Sua(SuaGVModel model)
         {
             IHttpActionResult httpActionResult;
             GiaoVien giaoVien = db.GiaoViens.FirstOrDefault(x => x.Id == model.Id);
